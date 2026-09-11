@@ -4,6 +4,8 @@ import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from 
 import { provideQuillConfig } from "ngx-quill/config";
 import { AppComponent } from "./app/app.component";
 import { routes } from "./app/app.routes";
+import { isDevMode } from '@angular/core';
+import { provideServiceWorker } from '@angular/service-worker';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -13,6 +15,10 @@ bootstrapApplication(AppComponent, {
       withComponentInputBinding()
     ),
     provideHttpClient(),
-    provideQuillConfig({}),
+    provideQuillConfig({}), 
+    provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 }).catch(console.error);

@@ -2,6 +2,7 @@
   "name": "online-publishing-platform",
   "version": "1.0.0",
   "private": true,
+  "author": "Akash Patel",
   "engines": {
     "node": "^24.15.0",
     "npm": ">=10"
@@ -10,7 +11,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test --watch=false"
+    "test": "ng test --watch=false",
+    "create-env": "copy src\\environments\\environment.local.example.ts src\\environments\\environment.local.ts"
   },
   "dependencies": {
     "@angular/common": "22.1.4",
@@ -19,6 +21,7 @@
     "@angular/forms": "22.1.4",
     "@angular/platform-browser": "22.1.4",
     "@angular/router": "22.1.4",
+    "@angular/service-worker": "22.1.4",
     "firebase": "12.18.0",
     "ngx-quill": "^31.0.1",
     "quill": "^2.0.3",

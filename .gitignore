@@ -4,3 +4,4 @@ dist
 out-tsc
 *.log
 .env
+src/environments/environment.local.ts
