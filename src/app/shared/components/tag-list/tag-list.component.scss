@@ -1,0 +1,12 @@
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    a {
+        font-size: 12px;
+        color: #6c4cff;
+        font-weight: 700;
+        text-decoration: none;
+    }
+}

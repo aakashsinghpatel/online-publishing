@@ -1,0 +1,55 @@
+.section {
+    .intro {
+        margin-bottom: 30px;
+
+        h1 {
+            font-size: 48px;
+            margin: 8px 0;
+        }
+
+        input {
+            margin-top: 15px;
+            width: min(430px, 100%);
+            padding: 11px;
+            border: 1px solid #e7e9ee;
+            border-radius: 10px;
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+
+        @media (max-width: 800px) {
+
+            grid-template-columns: 1fr;
+
+        }
+
+        .author {
+            padding: 22px;
+            display: flex;
+            gap: 16px;
+
+            img {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            h2 {
+                margin: 0;
+            }
+
+            p {
+                color: #687386;
+            }
+
+            strong {
+                color: #6c4cff;
+            }
+        }
+    }
+}

@@ -1,0 +1,87 @@
+<section class="hero">
+    <div class="container">
+        <span class="pill">ONLINE PUBLISHING</span>
+        <h1>Ideas worth <em>reading.</em></h1>
+        <p>
+            Discover thoughtful articles from independent writers, creators and
+            curious people.
+        </p>
+        <div class="search">
+            <span>⌕</span>
+            <!-- <input [value]="query()" (input)="onSearch($any($event.target).value)"
+                placeholder="Search articles or authors..." /> -->
+            <!-- Implemented Debounce Search -->
+              <input [value]="query()" (input)="query.set($any($event.target).value)"
+                placeholder="Search articles or authors..." />
+
+        </div>
+        <div class="popular-tags">
+            <small>POPULAR TAGS</small>
+            <div>
+                @for (t of popularTags(); track t.name) {
+                <a [routerLink]="['/tags', t.name]">#{{ t.name }} <span>{{ t.count }}</span></a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section container">
+    @if (featured().length) {
+    <div class="featured">
+        <div class="section-heading">
+            <div>
+                <small>EDITOR'S PICKS</small>
+                <h2>Featured stories</h2>
+            </div>
+        </div>
+        <div class="feature-grid">
+            @for (a of featured(); track a.id) {
+            <a class="feature card" [routerLink]="['/article', a.id]"><img [src]="a.thumbnail" [alt]="a.title" />
+                <div>
+                    <span class="pill">{{ a.tags[0] }}</span>
+                    <h3>{{ a.title }}</h3>
+                    <p>{{ a.description }}</p>
+                    <small>{{ a.authorName }} ·
+                        {{ a.publishedAt | date: "MMM d, y" }}</small>
+                </div>
+            </a>
+            }
+        </div>
+    </div>
+    }
+
+    <div class="feed-head">
+        <div>
+            <small>DISCOVER</small>
+            <h2>Articles</h2>
+        </div>
+        <select [value]="sort()" (change)="sort.set($any($event.target).value); page.set(1)">
+            <option value="latest">Latest</option>
+            <option value="popular">Most popular</option>
+            <option value="editor">Editor's pick</option>
+        </select>
+    </div>
+    <div class="feed">
+        @for (a of paged(); track a.id) {
+        <app-article-card [article]="a" />
+        } @empty {
+        <app-empty-state title="No articles found" message="Try another keyword, author or sort option." />
+        }
+    </div>
+    @if (pageNumbers().length > 1) {
+    <nav class="pagination" aria-label="Article pages">
+        <button type="button" [disabled]="page() === 1" (click)="page.update(value => value - 1)">
+            Previous
+        </button>
+        @for (n of pageNumbers(); track n) {
+        <button type="button" [class.current]="page() === n" (click)="page.set(n)">
+            {{ n }}
+        </button>
+        }
+        <button type="button" [disabled]="page() === pageNumbers().length" (click)="page.update(value => value + 1)">
+            Next
+        </button>
+    </nav>
+    }
+</section>

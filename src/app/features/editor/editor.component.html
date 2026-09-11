@@ -1,0 +1,46 @@
+<section class="section container">
+    <div class="head">
+        <span class="pill">PUBLISH</span>
+        <h1>Create a new post</h1>
+        <p class="muted">Draft your story, add tags and publish when ready.</p>
+    </div>
+    @if (!state.user()) {
+    <div class="card empty">Please sign in before creating an article.</div>
+    } @else {
+    <form class="editor card" (ngSubmit)="save()">
+        <div class="field">
+            <label for="title">Title</label>
+            <input id="title" name="title" [(ngModel)]="title" required placeholder="A clear, memorable title" />
+        </div>
+        <div class="field">
+            <label for="description">Brief description</label>
+            <textarea id="description" name="description" [(ngModel)]="description" rows="3" required></textarea>
+        </div>
+        <div class="field">
+            <label for="image">Thumbnail image URL</label>
+            <input id="image" name="image" [(ngModel)]="thumbnail" required placeholder="https://..." />
+        </div>
+        <div class="field">
+            <label for="tags">Tags</label>
+            <input id="tags" name="tags" [(ngModel)]="tagsText" required placeholder="Design, Angular, Career" />
+        </div>
+        <div class="field">
+            <label>Article content</label>
+            <quill-editor [(ngModel)]="content" name="content" [modules]="quillModules" [styles]="{ height: '360px' }"
+                placeholder="Start writing your article..."></quill-editor>
+        </div>
+        <div class="schedule">
+            <label for="schedule">Schedule for future publication (optional)</label>
+            <input id="schedule" type="datetime-local" name="schedule" [(ngModel)]="scheduledFor" />
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-ghost" (click)="save('draft')">
+                Save draft
+            </button>
+            <button type="submit" class="btn btn-primary">
+                {{ scheduledFor ? "Schedule" : "Publish" }} article
+            </button>
+        </div>
+    </form>
+    }
+</section>

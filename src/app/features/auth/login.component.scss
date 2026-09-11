@@ -1,0 +1,54 @@
+.section {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+
+    .login {
+        width: min(430px, 100%);
+        padding: 30px;
+        display: grid;
+        gap: 12px;
+
+        h1 {
+            margin: 4px 0;
+        }
+
+        button {
+            padding: 12px;
+            border: 1px solid #e7e9ee;
+            background: #fff;
+            border-radius: 10px;
+            font-weight: 700;
+
+            &:hover:not(:disabled) {
+                border-color: #6c4cff;
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+
+        a {
+            color: #6c4cff;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .notice {
+            font-size: 13px;
+            background: #f7f8fb;
+            border: 1px solid #e7e9ee;
+            border-radius: 9px;
+            padding: 10px;
+            color: #687386;
+        }
+
+        .error {
+            font-size: 13px;
+            color: #b42318;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+@if (article(); as article) {
+<article class="article-page container">
+    <span class="pill">{{ article.tags[0] }}</span>
+    <h1>{{ article.title }}</h1>
+    <p class="lead">{{ article.description }}</p>
+    <div class="by">
+        <span>By <strong>{{ article.authorName }}</strong></span><span>{{ article.publishedAt | date: "MMMM d, y"
+            }}</span>
+    </div>
+    <img class="cover" [src]="article.thumbnail" [alt]="article.title" />
+    <div class="body" [innerHTML]="article.content"></div>
+
+    @if (author(); as author) {
+    <section class="author card">
+        <img [src]="author.avatar" [alt]="author.name" loading="lazy" />
+        <div>
+            <strong>{{ author.name }}</strong>
+            <p>{{ author.bio }}</p>
+        </div>
+    </section>
+    }
+
+    @if (authorArticles().length) {
+    <section class="more-author">
+        <h2>More from {{ article.authorName }}</h2>
+        <div class="author-grid">
+            @for (item of authorArticles(); track item.id) {
+            <app-article-card [article]="item" />
+            }
+        </div>
+    </section>
+    }
+
+    <app-comment-section [articleId]="article.id" />
+
+    @if (related().length) {
+    <section class="related-section">
+        <h2>Related articles</h2>
+        <div class="related-grid">
+            @for (item of related(); track item.id) {
+            <app-article-card [article]="item" />
+            }
+        </div>
+    </section>
+    }
+</article>
+} @else {
+<app-empty-state title="Article not found" message="The requested article is not available." />
+}

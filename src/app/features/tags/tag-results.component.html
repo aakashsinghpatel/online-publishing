@@ -1,0 +1,12 @@
+<section class="section container">
+    <span class="pill">TAG</span>
+    <h1>#{{ tag() }}</h1>
+    <p class="muted">Articles exploring this topic.</p>
+    <div class="grid">
+        @for (a of articles(); track a.id) {
+        <app-article-card [article]="a" />
+        } @empty {
+        <app-empty-state title="No articles found" message="There are no published articles for this tag yet." />
+        }
+    </div>
+</section>

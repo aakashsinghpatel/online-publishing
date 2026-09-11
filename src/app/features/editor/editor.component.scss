@@ -1,0 +1,53 @@
+.section {
+    .head {
+        margin-bottom: 24px;
+
+        h1 {
+            font-size: 46px;
+            margin: 8px 0;
+        }
+
+        .editor {
+            padding: 28px;
+            max-width: 850px;
+
+            .schedule {
+                display: grid;
+                gap: 6px;
+                margin: 18px 0;
+
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e7e9ee;
+                    border-radius: 9px;
+                }
+            }
+
+            .actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .editor {
+        padding: 18px;
+    }
+
+    .head h1 {
+        font-size: 38px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions .btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,26 @@
+<section class="section">
+    <div class="login card">
+        <span class="pill">WELCOME</span>
+        <h1>Sign in to inkly.</h1>
+        <p class="muted">
+            Use a social account to join the conversation and publish with us.
+        </p>
+        <button [disabled]="busy() || !auth.isConfigured" (click)="login('google')">
+            Continue with Google
+        </button>
+        <button [disabled]="busy() || !auth.isConfigured" (click)="login('facebook')">
+            Continue with Facebook
+        </button>
+        @if (!auth.isConfigured) {
+        <div class="notice">
+            Social authentication is ready for Firebase, but this project needs
+            the Firebase Web App configuration before Google/Facebook sign-in can
+            be used.
+        </div>
+        }
+        @if (error()) {
+        <div class="error">{{ error() }}</div>
+        }
+        <a routerLink="/">Continue reading →</a>
+    </div>
+</section>

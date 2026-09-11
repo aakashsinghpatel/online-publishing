@@ -1,0 +1,65 @@
+<section class="comments">
+    <h2>Comments ({{ articleComments().length }})</h2>
+    @if (state.user()) {
+    <div class="comment-form">
+        <textarea [value]="newComment()" (input)="newComment.set($any($event.target).value)"
+            placeholder="Share your thoughts..."></textarea>
+        <button class="btn btn-primary" type="button" (click)="add()">
+            Post comment
+        </button>
+    </div>
+    } @else {
+    <p class="muted">Sign in to join the conversation.</p>
+    }
+
+    <select [value]="commentSort()" (change)="commentSort.set($any($event.target).value)">
+        <option value="new">Newest</option>
+        <option value="old">Oldest</option>
+        <option value="liked">Most liked</option>
+    </select>
+
+    @for (comment of rootComments(); track comment.id) {
+    <ng-container *ngTemplateOutlet="
+            commentTemplate;
+            context: { comment: comment, depth: 0 }
+          " />
+    }
+
+    @if (!articleComments().length) {
+    <p class="muted">Be the first person to comment.</p>
+    }
+
+    <ng-template #commentTemplate let-comment="comment" let-depth="depth">
+        <div class="comment" [style.margin-left.px]="depth * 36">
+            <div class="avatar">{{ comment.author[0] }}</div>
+            <div class="comment-content">
+                <strong>{{ comment.author }}</strong>
+                <small>{{ comment.date | date: "MMM d, y" }}</small>
+                <p>{{ comment.text }}</p>
+                <button type="button" (click)="like(comment.id)">
+                    ♥ {{ comment.likes }}
+                </button>
+                @if (state.user()) {
+                <button type="button" (click)="replyTo.set(comment.id)">
+                    Reply
+                </button>
+                }
+                @if (replyTo() === comment.id) {
+                <div class="reply-box">
+                    <input [value]="replyText()" (input)="replyText.set($any($event.target).value)"
+                        placeholder="Write a reply..." />
+                    <button class="btn btn-primary" type="button" (click)="add(comment.id)">
+                        Reply
+                    </button>
+                </div>
+                }
+                @for (reply of repliesFor(comment.id); track reply.id) {
+                <ng-container *ngTemplateOutlet="
+                  commentTemplate;
+                  context: { comment: reply, depth: depth + 1 }
+                " />
+                }
+            </div>
+        </div>
+    </ng-template>
+</section>

@@ -1,0 +1,12 @@
+<a class="article card" [routerLink]="['/article', article().id]">
+    <img [src]="article().thumbnail" [alt]="article().title" loading="lazy" />
+    <div>
+        <div class="meta">
+            <span>{{ article().authorName }}</span>
+            <span>{{ article().publishedAt | date: "MMM d, y" }}</span>
+        </div>
+        <h3>{{ article().title }}</h3>
+        <p>{{ article().description }}</p>
+        <app-tag-list [tags]="article().tags" />
+    </div>
+</a>

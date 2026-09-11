@@ -1,0 +1,20 @@
+<header class="top">
+    <div class="container nav">
+        <a routerLink="/" class="brand">inkly<span>.</span></a>
+        <nav>
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a><a
+                routerLink="/authors" routerLinkActive="active">Authors</a><a routerLink="/write"
+                routerLinkActive="active">Write</a>
+        </nav>
+        <div class="actions">
+            @if (state.user(); as user) {
+            <span class="user">{{ user.name }}</span><button class="btn btn-ghost" type="button" (click)="signOut()">
+                Sign out
+            </button>
+            } @else {
+            <a class="btn btn-primary" routerLink="/login">Sign in</a>
+            }
+        </div>
+    </div>
+</header>
+<main><router-outlet /></main>

@@ -1,0 +1,24 @@
+<section class="section container">
+    <div class="intro">
+        <span class="pill">COMMUNITY</span>
+        <h1>Meet the authors.</h1>
+        <p class="muted">Explore the people behind the stories.</p>
+        <input [value]="q()" (input)="q.set($any($event.target).value)" 
+        placeholder="Search authors..."
+            aria-label="Search authors" />
+    </div>
+    <div class="grid">
+        @for (a of filtered(); track a.id) {
+        <article class="card author">
+            <img [src]="a.avatar" [alt]="a.name" loading="lazy" />
+            <div>
+                <h2>{{ a.name }}</h2>
+                <p>{{ a.bio }}</p>
+                <strong>{{ articleCount(a.id) }} articles</strong>
+            </div>
+        </article>
+        } @empty {
+        <div class="empty card">No authors match your search.</div>
+        }
+    </div>
+</section>
