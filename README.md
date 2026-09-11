@@ -37,7 +37,7 @@ boundaries.
 ## 🔗 Project Links
 
 -   **GitHub Repository:** `https://github.com/aakashsinghpatel/online-publishing`
--   **Live Application:** `DEPLOYED_APPLICATION_URL`
+-   **Live Application:** `https://online-publishing.netlify.app/`
 -   **Local Application:** `http://localhost:4200`
 
 ------------------------------------------------------------------------
